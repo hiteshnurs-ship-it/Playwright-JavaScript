@@ -11,8 +11,8 @@ test('Login using POM', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.login(
-        loginData.username,
-        loginData.password
+        loginData.users.standardUser.username,
+        loginData.users.standardUser.password
     );
 
     await expect(page).toHaveURL(/inventory/);

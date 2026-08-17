@@ -15,11 +15,13 @@ test('Add products and verify cart', async ({ page }) => {
 
     // Login
 
+    // Login
+
     const loginPage = new LoginPage(page);
 
     await loginPage.login(
-        loginData.username,
-        loginData.password
+         loginData.users.standardUser.username,
+         loginData.users.standardUser.password
     );
 
 

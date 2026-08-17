@@ -14,8 +14,8 @@ test.beforeEach(
 
         // Login
         await loginPage.login(
-            loginData.username,
-            loginData.password
+             loginData.users.standardUser.username,
+             loginData.users.standardUser.password
         );
     }
 );

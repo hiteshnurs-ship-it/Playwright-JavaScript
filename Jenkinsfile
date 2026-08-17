@@ -1,6 +1,9 @@
 pipeline {
-
     agent any
+
+    triggers {
+        githubPush()
+    }
 
     stages {
 
@@ -34,28 +37,24 @@ pipeline {
                 bat 'call npx playwright test'
             }
         }
+
+        stage('Publish Playwright Report') {
+            steps {
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'Reports/Playwright Test Report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright HTML Report'
+                ])
+            }
+        }
     }
 
     post {
         always {
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright HTML Report'
-            ])
-
             echo '===== PLAYWRIGHT PIPELINE COMPLETED ====='
-        }
-
-        success {
-            echo '===== ALL PLAYWRIGHT TESTS PASSED ====='
-        }
-
-        failure {
-            echo '===== PLAYWRIGHT TESTS FAILED ====='
         }
     }
 }

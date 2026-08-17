@@ -1,4 +1,3 @@
-```groovy
 pipeline {
 
     agent any
@@ -7,11 +6,11 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo '===== CHECKING OUT SOURCE CODE ====='
+                echo '===== CHECKOUT ====='
             }
         }
 
-        stage('Environment') {
+        stage('Node Version') {
             steps {
                 bat 'node --version'
                 bat 'npm --version'
@@ -41,14 +40,5 @@ pipeline {
         always {
             echo '===== PLAYWRIGHT PIPELINE COMPLETED ====='
         }
-
-        success {
-            echo '===== ALL PLAYWRIGHT TESTS PASSED ====='
-        }
-
-        failure {
-            echo '===== PLAYWRIGHT TESTS FAILED ====='
-        }
     }
 }
-```
